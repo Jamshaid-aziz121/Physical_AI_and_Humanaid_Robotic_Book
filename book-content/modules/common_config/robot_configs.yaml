@@ -1,0 +1,121 @@
+# Configuration file for different robot models used in the Physical AI & Humanoid Robotics Book
+
+# Default humanoid robot configuration
+default_humanoid:
+  # Physical properties
+  mass: 50.0  # kg
+  height: 1.7  # meters
+  base_footprint_radius: 0.15  # meters
+
+  # Joint limits (in radians)
+  joint_limits:
+    shoulder_pitch_min: -1.57
+    shoulder_pitch_max: 1.57
+    shoulder_yaw_min: -2.0
+    shoulder_yaw_max: 2.0
+    elbow_pitch_min: -2.5
+    elbow_pitch_max: 0.5
+    hip_pitch_min: -1.0
+    hip_pitch_max: 2.0
+    knee_pitch_min: -2.5
+    knee_pitch_max: 0.0
+    ankle_pitch_min: -0.7
+    ankle_pitch_max: 0.7
+    ankle_roll_min: -0.4
+    ankle_roll_max: 0.4
+
+  # Actuator specifications
+  actuators:
+    max_torque: 100.0  # Nm
+    max_velocity: 5.0   # rad/s
+
+  # Sensor specifications
+  sensors:
+    imu_frequency: 100  # Hz
+    camera_resolution: [640, 480]
+    lidar_range: 10.0   # meters
+    lidar_fov: 360      # degrees
+
+# NAO robot configuration (example)
+nao_robot:
+  # Physical properties
+  mass: 5.2  # kg
+  height: 0.58  # meters
+  base_footprint_radius: 0.08  # meters
+
+  # Joint limits (in radians)
+  joint_limits:
+    shoulder_pitch_min: -2.08
+    shoulder_pitch_max: 2.08
+    shoulder_roll_min: -0.34
+    shoulder_roll_max: 1.31
+    elbow_yaw_min: -2.08
+    elbow_yaw_max: 2.08
+    elbow_roll_min: -1.54
+    elbow_roll_max: -0.02
+    hip_pitch_min: -1.73
+    hip_pitch_max: 1.14
+    knee_pitch_min: -2.22
+    knee_pitch_max: 0.0
+    ankle_pitch_min: -1.14
+    ankle_pitch_max: 0.93
+    ankle_roll_min: -0.74
+    ankle_roll_max: 0.38
+
+  # Actuator specifications
+  actuators:
+    max_torque: 4.0  # Nm
+    max_velocity: 8.0   # rad/s
+
+  # Sensor specifications
+  sensors:
+    imu_frequency: 50  # Hz
+    camera_resolution: [320, 240]
+    lidar_range: 5.0   # meters
+    lidar_fov: 240     # degrees
+
+# Unitree H1 robot configuration (example)
+unitree_h1:
+  # Physical properties
+  mass: 32.0  # kg
+  height: 1.45  # meters
+  base_footprint_radius: 0.12  # meters
+
+  # Joint limits (in radians)
+  joint_limits:
+    shoulder_pitch_min: -1.57
+    shoulder_pitch_max: 1.57
+    shoulder_roll_min: -1.57
+    shoulder_roll_max: 1.57
+    elbow_pitch_min: -2.7
+    elbow_pitch_max: 0.7
+    hip_pitch_min: -1.05
+    hip_pitch_max: 2.05
+    knee_pitch_min: -2.9
+    knee_pitch_max: 0.0
+    ankle_pitch_min: -0.87
+    ankle_pitch_max: 0.52
+    ankle_roll_min: -0.52
+    ankle_roll_max: 0.52
+
+  # Actuator specifications
+  actuators:
+    max_torque: 80.0  # Nm
+    max_velocity: 6.0   # rad/s
+
+  # Sensor specifications
+  sensors:
+    imu_frequency: 200  # Hz
+    camera_resolution: [1280, 720]
+    lidar_range: 25.0   # meters
+    lidar_fov: 360      # degrees
+
+# Simulation environment configuration
+simulation:
+  gravity: [0, 0, -9.81]  # m/s^2
+  physics_step_size: 0.001  # seconds
+  max_update_rate: 1000  # Hz
+  contact_surface_params:
+    mu: 1.0  # friction coefficient
+    kp: 1000000.0  # stiffness
+    kd: 100.0  # damping
