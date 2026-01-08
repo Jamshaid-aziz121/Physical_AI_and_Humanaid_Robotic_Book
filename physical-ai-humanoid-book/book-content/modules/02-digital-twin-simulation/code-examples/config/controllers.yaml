@@ -1,0 +1,133 @@
+# Controller configuration for the humanoid robot in Gazebo
+# Used with ros2_control framework for joint control
+
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    # Joint trajectory controller for precise position control
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    # Joint state broadcaster to publish all joint states
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+# Joint Trajectory Controller Configuration
+joint_trajectory_controller:
+  ros__parameters:
+    # Joint names for the humanoid robot
+    joints:
+      - left_hip_joint
+      - left_knee_joint
+      - left_ankle_joint
+      - right_hip_joint
+      - right_knee_joint
+      - right_ankle_joint
+      - left_shoulder_joint
+      - left_elbow_joint
+      - right_shoulder_joint
+      - right_elbow_joint
+      - neck_joint
+
+    # Command interfaces - how we send commands to joints
+    command_interfaces:
+      - position
+
+    # State interfaces - what feedback we get from joints
+    state_interfaces:
+      - position
+      - velocity
+
+    # Allow commands to be issued without a full trajectory
+    allow_partial_joints_goal: true
+    open_loop_control: false
+
+    # Default tolerances for trajectory execution
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
+
+# Joint State Broadcaster Configuration
+joint_state_broadcaster:
+  ros__parameters:
+    # Joints to publish state for
+    joints:
+      - left_hip_joint
+      - left_knee_joint
+      - left_ankle_joint
+      - right_hip_joint
+      - right_knee_joint
+      - right_ankle_joint
+      - left_shoulder_joint
+      - left_elbow_joint
+      - right_shoulder_joint
+      - right_elbow_joint
+      - neck_joint
+
+    # Extra joints that are not controlled but we want to monitor
+    extra_joints: []
+
+# Position Controllers for individual joints (if needed)
+left_hip_position_controller:
+  ros__parameters:
+    joint: left_hip_joint
+    interface_name: position
+
+left_knee_position_controller:
+  ros__parameters:
+    joint: left_knee_joint
+    interface_name: position
+
+right_hip_position_controller:
+  ros__parameters:
+    joint: right_hip_joint
+    interface_name: position
+
+right_knee_position_controller:
+  ros__parameters:
+    joint: right_knee_joint
+    interface_name: position
+
+# Velocity Controllers (for different control scenarios)
+left_wheel_velocity_controller:
+  ros__parameters:
+    joints:
+      - left_wheel_joint
+    interface_name: velocity
+
+right_wheel_velocity_controller:
+  ros__parameters:
+    joints:
+      - right_wheel_joint
+    interface_name: velocity
+
+# Effort Controllers (for force control)
+left_gripper_effort_controller:
+  ros__parameters:
+    joints:
+      - left_gripper_joint
+    interface_name: effort
+
+right_gripper_effort_controller:
+  ros__parameters:
+    joints:
+      - right_gripper_joint
+    interface_name: effort
+
+# IMU Sensor Configuration
+imu_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: imu_sensor
+    frame_id: torso
+    update_rate: 100.0
+    orientation_covariance_diagonal: [0.01, 0.01, 0.01]
+    angular_velocity_covariance_diagonal: [0.01, 0.01, 0.01]
+    linear_acceleration_covariance_diagonal: [0.1, 0.1, 0.1]
+
+# Force/Torque Sensor Configuration
+fts_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: force_torque_sensor
+    frame_id: left_end_effector
+    update_rate: 100.0
