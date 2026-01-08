@@ -31,7 +31,12 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Library-First & Modular Thinking: Verify all components are designed as independent, reusable modules with clear inputs/outputs
+- Spec Before Writing: Confirm comprehensive specification exists before any implementation
+- Deterministic Structure: Ensure all deliverables follow the required structure (Problem Definition, System Architecture, Algorithms & Models, Data & Signals, Execution Flow, Failure Modes & Limits)
+- Real Robotics Stacks Only: Validate all examples use real-world stacks (ROS 2, actual sensors/actuators, etc.)
+- Reproducibility & Engineering Accuracy: Confirm all technical claims are verifiable and code snippets are correct
+- AI Usage Rules: Verify AI follows specs and doesn't make assumptions
 
 ## Project Structure
 

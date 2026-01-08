@@ -1,0 +1,128 @@
+# ROS 2 Interface Definitions for Physical AI & Humanoid Robotics Book
+
+# Service for robot joint control
+service:
+  name: JointControl
+  request:
+    joint_positions:
+      type: float64[]
+      description: Array of target positions for each joint
+    joint_names:
+      type: string[]
+      description: Names of joints corresponding to positions
+    duration:
+      type: float64
+      description: Time to reach target position in seconds
+  response:
+    success:
+      type: bool
+      description: Whether the command was accepted
+    error_message:
+      type: string
+      description: Error message if success is false
+    execution_time:
+      type: float64
+      description: Actual time taken to execute the command
+
+# Message for sensor data
+message:
+  name: SensorData
+  fields:
+    header:
+      type: std_msgs/Header
+      description: Standard ROS header
+    sensor_type:
+      type: string
+      description: Type of sensor (lidar, camera, imu, etc.)
+    sensor_id:
+      type: string
+      description: Unique identifier for the sensor
+    timestamp:
+      type: time
+      description: Time when data was captured
+    data:
+      type: uint8[]
+      description: Raw sensor data bytes
+    processed_data:
+      type: string
+      description: JSON string containing processed sensor data
+
+# Action for navigation tasks
+action:
+  name: NavigateToPose
+  goal:
+    target_pose:
+      type: geometry_msgs/PoseStamped
+      description: Target pose for navigation
+    navigation_mode:
+      type: string
+      description: Mode of navigation (path_planning, direct, etc.)
+  result:
+    success:
+      type: bool
+      description: Whether navigation was successful
+    final_pose:
+      type: geometry_msgs/PoseWithCovarianceStamped
+      description: Final pose achieved
+    distance_traveled:
+      type: float64
+      description: Total distance traveled during navigation
+    execution_time:
+      type: float64
+      description: Time taken to complete navigation
+  feedback:
+    current_pose:
+      type: geometry_msgs/PoseStamped
+      description: Current pose during navigation
+    distance_remaining:
+      type: float64
+      description: Distance remaining to target
+    estimated_time_remaining:
+      type: float64
+      description: Estimated time to reach target
+
+# Service for object detection
+service:
+  name: DetectObjects
+  request:
+    sensor_data:
+      type: SensorData
+      description: Sensor data to analyze
+    object_classes:
+      type: string[]
+      description: Classes of objects to detect
+    confidence_threshold:
+      type: float64
+      description: Minimum confidence for detection
+  response:
+    objects_detected:
+      type: array
+      items:
+        type: ObjectInfo
+        description: Information about detected objects
+    success:
+      type: bool
+      description: Whether detection was successful
+    processing_time:
+      type: float64
+      description: Time taken for object detection
+
+# Message for object information
+message:
+  name: ObjectInfo
+  fields:
+    id:
+      type: string
+      description: Unique identifier for the object
+    class_name:
+      type: string
+      description: Class of the object (cup, chair, etc.)
+    confidence:
+      type: float64
+      description: Confidence score of detection
+    position:
+      type: geometry_msgs/Point
+      description: 3D position of the object
+    bounding_box:
+      type: geometry_msgs/Polygon
+      description: 2D bounding box in image coordinates

@@ -8,6 +8,13 @@ description: "Task list template for feature implementation"
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
+**Constitution Compliance**: All tasks MUST adhere to the Physical AI & Humanoid Robotics Book Constitution:
+- Library-First & Modular Thinking: Each task creates independent, reusable modules
+- Spec Before Writing: All tasks derive from approved specifications
+- Deterministic Structure: Deliverables follow required structure
+- Real Robotics Stacks Only: Use real-world stacks (ROS 2, actual sensors/actuators, etc.)
+- Reproducibility & Engineering Accuracy: All technical claims must be verifiable
+
 **Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.

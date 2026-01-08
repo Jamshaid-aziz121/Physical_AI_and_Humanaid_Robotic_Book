@@ -1,9 +1,24 @@
 # Feature Specification: [FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
+**Feature Branch**: `[###-feature-name]`
+**Created**: [DATE]
+**Status**: Draft
 **Input**: User description: "$ARGUMENTS"
+
+## Objective
+[Define the specific objective of this feature/module]
+
+## Scope & Non-Scope
+[Define what is included and excluded from this feature/module]
+
+## Key Concepts
+[Define the key concepts and terminology for this feature/module]
+
+## Inputs / Outputs
+[Define the inputs and outputs of this feature/module]
+
+## Validation Criteria
+[Define how this feature/module will be validated]
 
 ## User Scenarios & Testing *(mandatory)*
 
