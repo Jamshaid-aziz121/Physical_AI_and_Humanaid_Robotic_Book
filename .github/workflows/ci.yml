@@ -1,69 +1,50 @@
-name: Continuous Integration
+name: Deploy Docusaurus to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-    - name: Install ROS 2 Humble
-      run: |
-        sudo apt update
-        sudo apt install -y software-properties-common
-        sudo add-apt-repository universe
-        sudo apt update
-        sudo apt install -y curl gnupg lsb-release
-        sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-        sudo apt update
-        
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Install Python dependencies
-      run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt || echo "No requirements.txt found"
+      - name: Build Docusaurus site
+        run: npm run build
 
-    - name: Check code examples exist
-      run: |
-        if [ ! -d "book-content/modules/01-ros2-fundamentals/code-examples" ]; then
-          echo "ROS 2 examples directory not found!"
-          exit 1
-        fi
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
 
-    - name: Validate URDF files
-      run: |
-        if command -v gz &> /dev/null; then
-          echo "Gazebo installed, checking URDF files..."
-          find simulation-assets/urdf -name "*.urdf" -exec check_urdf {} \; || echo "URDF validation skipped"
-        else
-          echo "Gazebo not available, skipping URDF validation"
-        fi
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
 
-    - name: Run basic tests
-      run: |
-        echo "Running basic validation tests..."
-        python -m py_compile book-content/modules/common_utils/robot_utils.py
-        echo "Python syntax validation passed"
-
-    - name: Run Print Path
-      run: |
-        echo "current working directory"
-        ls
-
-    - name: Validate Docusaurus site
-      run: |
-        echo "Building...."
-        npm ci
-        npm run build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -20,10 +20,10 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://jamshaid-aziz121.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: 'Physical_AI_and_Humanaid_Robotic_Book/physical-ai-humanoid-book',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
