@@ -57,6 +57,11 @@ jobs:
         python -m py_compile book-content/modules/common_utils/robot_utils.py
         echo "Python syntax validation passed"
 
+    - name: Run Print Path
+      run: |
+        echo "current working directory"
+        ls
+
     - name: Validate Docusaurus site
       run: |
         cd physical-ai-humanoid-book
