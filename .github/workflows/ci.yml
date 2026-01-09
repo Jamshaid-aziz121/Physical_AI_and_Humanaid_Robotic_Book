@@ -61,7 +61,7 @@ jobs:
 
     - name: Validate Docusaurus site
       run: |
-        cd website/docusaurus
+        cd physical-ai-humanoid-book
         if [ -f "package.json" ]; then
           npm ci
           npm run build
