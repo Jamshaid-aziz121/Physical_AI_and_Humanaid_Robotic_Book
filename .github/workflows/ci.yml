@@ -64,9 +64,6 @@ jobs:
 
     - name: Validate Docusaurus site
       run: |
-        if [ -f "package.json" ]; then
-          npm ci
-          npm run build
-        else
-          echo "Docusaurus site not found, skipping validation"
-        fi
+        echo "Building...."
+        npm ci
+        npm run build
