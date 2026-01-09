@@ -23,7 +23,7 @@ const config = {
   url: 'https://jamshaid-aziz121.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: 'Physical_AI_and_Humanaid_Robotic_Book/physical-ai-humanoid-book',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
